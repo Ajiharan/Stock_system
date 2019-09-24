@@ -19,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
 import link1.LinkListX;
 import link1.LinkX;
 import org.jdom.DocType;
+import net.sf.jasperreports.view.*;
+import net.sf.jasperreports.engine.*;
 
 /**
  *
@@ -766,6 +768,11 @@ public class EmployeeDetails extends javax.swing.JFrame {
         bt_report.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bt_report.setForeground(new java.awt.Color(0, 153, 0));
         bt_report.setText("Report");
+        bt_report.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_reportActionPerformed(evt);
+            }
+        });
 
         bt_add.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bt_add.setForeground(new java.awt.Color(0, 153, 153));
@@ -1224,7 +1231,7 @@ public class EmployeeDetails extends javax.swing.JFrame {
         bt_search.setEnabled(true);
       txt_search.setEnabled(true);
       bt_add.setEnabled(false);
-      bt_report.setEnabled(false);
+     // bt_report.setEnabled(false);
       bt_delete.setEnabled(false);
       //ch_search.setEnabled(true);
       bt_cancel.setEnabled(true);
@@ -1925,7 +1932,7 @@ public class EmployeeDetails extends javax.swing.JFrame {
         btn_next.setEnabled(false);
         btn_prev.setEnabled(false);
         bt_delete.setEnabled(false);
-        bt_report.setEnabled(true);
+       // bt_report.setEnabled(true);
         bt_edit.setEnabled(true);
         check_emp_password.setEnabled(false);
         bt_cancel.setEnabled(false);
@@ -2335,6 +2342,18 @@ public class EmployeeDetails extends javax.swing.JFrame {
         emp_pas.setVisible(true);
         emp_pas.setId(id.getText());
     }//GEN-LAST:event_check_emp_passwordActionPerformed
+
+    private void bt_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_reportActionPerformed
+       try{
+           String report="C:\\Users\\Haran\\Documents\\NetBeansProjects\\ps_Atlanta\\src\\Employee_Report\\emp1.jrxml";
+           JasperReport jasp=JasperCompileManager.compileReport(report);
+           JasperPrint jas_print=JasperFillManager.fillReport(jasp,null,con);
+           JasperViewer.viewReport(jas_print);
+       }
+       catch(Exception e){
+          JOptionPane.showMessageDialog(null, e);
+       }
+    }//GEN-LAST:event_bt_reportActionPerformed
 
     public void addDetail(){
         if(lname_check &&  fname_check && gender_check && dobcheck && status_check && address_check && pass1_check && pass2_check && email_check && contact_check && nic_check && quali_check && check_qualification && lang_check && des_check && employee_check && joindate_check)

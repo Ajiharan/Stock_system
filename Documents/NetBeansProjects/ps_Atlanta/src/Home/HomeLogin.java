@@ -54,8 +54,6 @@ public class HomeLogin extends javax.swing.JFrame{
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        set_btn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -65,6 +63,7 @@ public class HomeLogin extends javax.swing.JFrame{
         staff_login = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -81,15 +80,6 @@ public class HomeLogin extends javax.swing.JFrame{
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("User & Admin Signin");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "theme1", "theme2", "theme3", "theme4", "default" }));
-
-        set_btn.setText("SetTheme");
-        set_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                set_btnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -104,12 +94,7 @@ public class HomeLogin extends javax.swing.JFrame{
                         .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(set_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -121,11 +106,7 @@ public class HomeLogin extends javax.swing.JFrame{
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(set_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 255));
@@ -183,17 +164,26 @@ public class HomeLogin extends javax.swing.JFrame{
 
         jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Haran\\Documents\\NetBeansProjects\\ps_Atlanta\\src\\Home\\pass1.png")); // NOI18N
 
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DarkMode", "LightGreen", "Smart", "Texture", "Default" }));
+        jComboBox1.setToolTipText("select theme");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(staff_user, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -201,18 +191,15 @@ public class HomeLogin extends javax.swing.JFrame{
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(116, 116, 116)))
-                            .addComponent(staff_password, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(staff_login, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(staff_password, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(staff_user, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(45, 45, 45)
+                                        .addComponent(staff_login, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap())))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,9 +218,11 @@ public class HomeLogin extends javax.swing.JFrame{
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addComponent(staff_password, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(39, 39, 39)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(staff_login, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -241,7 +230,9 @@ public class HomeLogin extends javax.swing.JFrame{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,6 +244,39 @@ public class HomeLogin extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void staff_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staff_loginActionPerformed
+          String name=(String) jComboBox1.getSelectedItem();
+        try{
+            com.jtattoo.plaf.acryl.AcrylLookAndFeel.setTheme("Green","INSERT YOUR LICENSE KEY HERE","company");
+            if(name.equals("DarkMode")){
+                UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+                DecorationHelper.decorateWindows(false);
+              
+                
+            }
+            else if(name.equals("LightGreen")){
+                UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+                  DecorationHelper.decorateWindows(false);
+               
+            }
+            else if(name.equals("Smart")){
+                UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+                  DecorationHelper.decorateWindows(false);
+            
+            }
+            else if(name.equals("Texture")){
+                UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+                  DecorationHelper.decorateWindows(false);
+            
+               
+            }
+            else{
+                  DecorationHelper.decorateWindows(false);
+               
+            }
+        }
+        catch(Exception e){
+            
+        }
         staff_log();
     }//GEN-LAST:event_staff_loginActionPerformed
 
@@ -263,47 +287,6 @@ public class HomeLogin extends javax.swing.JFrame{
                                 this, WindowEvent.WINDOW_CLOSING));
       
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void set_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_set_btnActionPerformed
-         String name=(String) jComboBox1.getSelectedItem();
-        try{
-            com.jtattoo.plaf.acryl.AcrylLookAndFeel.setTheme("Green","INSERT YOUR LICENSE KEY HERE","company");
-            if(name.equals("theme1")){
-                UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
-                DecorationHelper.decorateWindows(false);
-                this.dispose();
-                new HomeLogin().setVisible(true);
-               
-                
-            }
-            else if(name.equals("theme2")){
-                UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-                  DecorationHelper.decorateWindows(false);
-                 this.dispose();
-                new HomeLogin().setVisible(true);
-            }
-            else if(name.equals("theme3")){
-                UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-                  DecorationHelper.decorateWindows(false);
-              this.dispose();
-                new HomeLogin().setVisible(true);
-            }
-            else if(name.equals("theme4")){
-                UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
-                  DecorationHelper.decorateWindows(false);
-                this.dispose();
-                new HomeLogin().setVisible(true);
-            }
-            else{
-                  DecorationHelper.decorateWindows(false);
-                this.dispose();
-                new HomeLogin().setVisible(true);
-            }
-        }
-        catch(Exception e){
-            
-        }
-    }//GEN-LAST:event_set_btnActionPerformed
   public void staff_log(){
         
         String username=staff_user.getText();
@@ -476,7 +459,6 @@ public class HomeLogin extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JButton set_btn;
     private javax.swing.JButton staff_login;
     private javax.swing.JPasswordField staff_password;
     private javax.swing.JTextField staff_user;

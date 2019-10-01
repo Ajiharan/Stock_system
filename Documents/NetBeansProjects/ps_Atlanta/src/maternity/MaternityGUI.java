@@ -31,7 +31,8 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 //import pms.opd.opdGUI;
 import Pharmacy.Stock_management;
-import opd.opdGUI;
+import opd.*;
+
 
 
 /**

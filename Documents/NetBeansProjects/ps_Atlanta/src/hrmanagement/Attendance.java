@@ -454,36 +454,53 @@ public class Attendance extends javax.swing.JFrame {
                                     
                                 String sql2 = "SELECT * FROM daily_attendance";
 
-                            try
-                            {
-
-                                st = con.createStatement();
-                                rs = st.executeQuery(sql2);
-                                attendenceTableShow(rs);
-                               
-
-                                int rows=0;
-                                while(rs.next())
+                                try
                                 {
-                                    rows++;
-                                    String idd = rs.getString(1);
-                                    id="DA"+(Integer.parseInt(idd.substring(2,9))+1);
+
+                                    st = con.createStatement();
+                                    rs = st.executeQuery(sql2);
+                                   
+
+
+                                    int rows=0;
+                                    while(rs.next())
+                                    {
+                                        rows++;
+                                        String idd = rs.getString(1);
+                                       
+                                        id="DA"+(Integer.parseInt(idd.substring(2,9))+1);
+                                    }
+                                    if(rows<0)
+                                    {
+                                        id="DA1111111";
+                                    }
                                 }
-                                if(rows<1)
+                                catch(SQLException ex)
                                 {
                                     id="DA1111111";
                                 }
-                            }
-                            catch(SQLException ex)
-                            {
-                                id="DA1111111";
-                            }
-                            finally{
-                                rs.close();
-                                st.close();
-                            }
-                            
-                          
+                                finally{
+                                    rs.close();
+                                    st.close();
+                                }
+                                 try
+                                {
+
+                                    st = con.createStatement();
+                                    rs = st.executeQuery(sql2);
+                                    attendenceTableShow(rs);
+
+
+
+                                }
+                                catch(SQLException ex)
+                                {
+
+                                }
+                                finally{
+                                    rs.close();
+                                    st.close();
+                                }
                           
                             }
                             txt_username.setText("");

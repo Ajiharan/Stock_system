@@ -914,7 +914,7 @@ public class opdGUI extends javax.swing.JFrame {
         String payment = payment_text.getText();
         
         if(title.trim().equals("") || fname.trim().equals("") || lname.trim().equals("") || age.trim().equals("") ||
-                contact_no.trim().equals("") || visit_type.trim().equals("select") || payment.trim().equals("") || phone == false)
+                contact_no.trim().equals("") || visit_type.trim().equals("select") || payment.trim().equals(""))
         {
             JOptionPane.showMessageDialog(null,"Fill All the Fields");
         }

@@ -74,7 +74,7 @@ FROM
 	<title>
 		<band height="138" splitType="Stretch">
 			<staticText>
-				<reportElement style="Title" x="108" y="32" width="497" height="62" uuid="64da8bc3-f40b-46ce-bc84-1a8cd70d9afc"/>
+				<reportElement style="Title" x="185" y="49" width="497" height="62" uuid="64da8bc3-f40b-46ce-bc84-1a8cd70d9afc"/>
 				<textElement verticalAlignment="Middle">
 					<font pdfFontName="Times-Roman"/>
 				</textElement>

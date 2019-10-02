@@ -20,6 +20,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -39,7 +44,7 @@ public class Main extends javax.swing.JFrame {
         jDesktopPane1.removeAll();
         jDesktopPane1.updateUI();
         Point_of_sale i1=new Point_of_sale();
-          REPORT.setEnabled(false);
+         
         jDesktopPane1.add(i1).setVisible(true);
         
         POS.setEnabled(false);
@@ -272,7 +277,15 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void REPORTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REPORTActionPerformed
-        // TODO add your handling code here:
+          try{
+           String report="C:\\Users\\Haran\\Documents\\NetBeansProjects\\ps_Atlanta\\src\\pharmacy_report\\report_phamacy.jrxml";
+           JasperReport jasp=JasperCompileManager.compileReport(report);
+           JasperPrint jas_print=JasperFillManager.fillReport(jasp,null, conn);
+           JasperViewer.viewReport(jas_print);
+       }
+       catch(Exception e){
+          JOptionPane.showMessageDialog(null, e);
+       }
          
     }//GEN-LAST:event_REPORTActionPerformed
 

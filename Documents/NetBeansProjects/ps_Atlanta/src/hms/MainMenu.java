@@ -1876,7 +1876,15 @@ public final class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+         try{
+           String report="C:\\Users\\Haran\\Documents\\NetBeansProjects\\ps_Atlanta\\src\\hms_report\\Payments.jrxml";
+           JasperReport jasp=JasperCompileManager.compileReport(report);
+           JasperPrint jas_print=JasperFillManager.fillReport(jasp,null,conn);
+           JasperViewer.viewReport(jas_print);
+       }
+       catch(Exception e){
+          JOptionPane.showMessageDialog(null, e);
+       }
     
     }//GEN-LAST:event_jButton9ActionPerformed
 

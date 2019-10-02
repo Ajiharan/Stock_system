@@ -5,9 +5,9 @@
  */
 package opd;
 
-
+import Extras.Validation;
 import Extras.ViewDBRecords;
-import Home.Home_Main;
+
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -22,6 +22,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -126,6 +131,7 @@ public class opdGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         Records_Button = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         channelpanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -215,6 +221,13 @@ public class opdGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Report");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -223,10 +236,12 @@ public class opdGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Records_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addGap(48, 48, 48)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(184, 184, 184))
+                .addGap(18, 18, 18)
+                .addComponent(Records_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +251,8 @@ public class opdGUI extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Records_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
 
@@ -803,7 +819,7 @@ public class opdGUI extends javax.swing.JFrame {
 
     private void contactFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_contactFocusLost
         // TODO add your handling code here:
-       // phone = Validation.validatePhone(contact, jLabel23, phone);
+        phone = Validation.validatePhone(contact, jLabel23, phone);
     }//GEN-LAST:event_contactFocusLost
 
     private void channel_add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_channel_add_buttonActionPerformed
@@ -914,7 +930,7 @@ public class opdGUI extends javax.swing.JFrame {
         String payment = payment_text.getText();
         
         if(title.trim().equals("") || fname.trim().equals("") || lname.trim().equals("") || age.trim().equals("") ||
-                contact_no.trim().equals("") || visit_type.trim().equals("select") || payment.trim().equals(""))
+                contact_no.trim().equals("") || visit_type.trim().equals("select") || payment.trim().equals("") || phone == false)
         {
             JOptionPane.showMessageDialog(null,"Fill All the Fields");
         }
@@ -1005,39 +1021,37 @@ public class opdGUI extends javax.swing.JFrame {
 
     private void Records_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Records_ButtonActionPerformed
         // TODO add your handling code here:
-      ViewDBRecords vr = new ViewDBRecords();
+        ViewDBRecords vr = new ViewDBRecords();
         vr.show();
     }//GEN-LAST:event_Records_ButtonActionPerformed
 
     private void first_nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_first_nameFocusLost
         // TODO add your handling code here:
         String s = first_name.getText();
-        //letter = Validation.checkLetter(s);
+        letter = Validation.checkLetter(s);
     }//GEN-LAST:event_first_nameFocusLost
 
     private void last_nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_last_nameFocusLost
         // TODO add your handling code here:
         String s = last_name.getText();
-       // letter = Validation.checkLetter(s);
+        letter = Validation.checkLetter(s);
     }//GEN-LAST:event_last_nameFocusLost
 
     private void age_textFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_age_textFocusLost
         // TODO add your handling code here:
         String s = age_text.getText();
-       // number = Validation.checkNumber(s);
+        number = Validation.checkNumber(s);
     }//GEN-LAST:event_age_textFocusLost
 
     private void payment_textFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_payment_textFocusLost
         // TODO add your handling code here:
         String s = payment_text.getText();
-        //number = Validation.checkNumber(s);
+        number = Validation.checkNumber(s);
     }//GEN-LAST:event_payment_textFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        Home_Main hm = new Home_Main();
-        hm.setVisible(true);
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void physician_name_comboFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_physician_name_comboFocusGained
@@ -1064,6 +1078,18 @@ public class opdGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        getname();
     }//GEN-LAST:event_field_comboItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+          try{
+           String report="C:\\Users\\Haran\\Documents\\NetBeansProjects\\ps_Atlanta\\src\\OPD_report\\OPD_report.jrxml";
+           JasperReport jasp=JasperCompileManager.compileReport(report);
+           JasperPrint jas_print=JasperFillManager.fillReport(jasp,null,conn);
+           JasperViewer.viewReport(jas_print);
+       }
+       catch(Exception e){
+          JOptionPane.showMessageDialog(null, e);
+       }
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1090,6 +1116,38 @@ public class opdGUI extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(opdGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -1239,6 +1297,7 @@ public class opdGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> field_combo;
     private javax.swing.JTextField first_name;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

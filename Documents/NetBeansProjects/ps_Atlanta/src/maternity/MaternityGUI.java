@@ -1259,21 +1259,15 @@ public class MaternityGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_total_amountFocusGained
 
     private void invoice_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoice_buttonActionPerformed
-        // TODO add your handling code here:
-        HashMap parameter = new HashMap();
-        String test= JOptionPane.showInputDialog("Please insert the maternity ID");
-        parameter.put("patientID", test);
-
-        try {
-            String path="C:\\Users\\USER\\Desktop\\Desktop Folders\\ITP_SLIIT\\MY ITP\\After prototype\\Maternity_Report.jrxml";
-            
-            JasperReport jr = JasperCompileManager.compileReport(path);  
-            JasperPrint jp = JasperFillManager.fillReport(jr, parameter, conn);
-            JasperViewer.viewReport(jp,false);
-        } catch (JRException ex) {
-            Logger.getLogger(Stock_management.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null,ex);
-        }
+         try{
+           String report="C:\\Users\\Haran\\Documents\\NetBeansProjects\\ps_Atlanta\\src\\maternity_report\\report_maternity.jrxml";
+           JasperReport jasp=JasperCompileManager.compileReport(report);
+           JasperPrint jas_print=JasperFillManager.fillReport(jasp,null,conn);
+           JasperViewer.viewReport(jas_print);
+       }
+       catch(Exception e){
+          JOptionPane.showMessageDialog(null, e);
+       }
     }//GEN-LAST:event_invoice_buttonActionPerformed
 
     /**

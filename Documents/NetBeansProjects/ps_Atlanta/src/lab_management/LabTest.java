@@ -324,7 +324,7 @@ public class LabTest extends javax.swing.JFrame {
               SpecimenNoAtLab.setText(sNo);
               
               String sp = rs.getString("SPECIMEN");
-              specimenAtLab.setText(sp);
+             specimenAtLab.setText(sp);
               
               String scd = rs.getString("SAMPLE_COL_DATE");
               sDate.setText(scd);
@@ -436,7 +436,7 @@ public class LabTest extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        testList = new javax.swing.JList<String>();
+        testList = new javax.swing.JList<>();
         sDate = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         SpecimenNoAtLab = new javax.swing.JTextField();
@@ -447,11 +447,11 @@ public class LabTest extends javax.swing.JFrame {
         RFphy = new javax.swing.JTextField();
         refNoAtLab = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        out = new javax.swing.JList<String>();
+        out = new javax.swing.JList<>();
         LRefNSearch = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        RStatusAtLab = new javax.swing.JComboBox<String>();
+        RStatusAtLab = new javax.swing.JComboBox<>();
         valSN = new javax.swing.JLabel();
         valS = new javax.swing.JLabel();
         valRP = new javax.swing.JLabel();
@@ -464,7 +464,7 @@ public class LabTest extends javax.swing.JFrame {
         age = new javax.swing.JTextField();
         search = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
-        gender = new javax.swing.JComboBox<String>();
+        gender = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -524,10 +524,10 @@ public class LabTest extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel11.setText("List Of Lab Test");
 
-        testList.setModel(new javax.swing.AbstractListModel() {
+        testList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Fasting Blood Sugar", "Random Cholesterol", "Urine Full Report", "Serum Albumin", "Glucose Tolerance Test", "Blood Grouping", "Pack Cell Volume", "Haemoglobin(HB)", "Full Blood Count", "Hepatitis B Surface Antigen", "Dengue Antigen", "Sputum For Gramstrain", " " };
             public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane2.setViewportView(testList);
 
@@ -604,7 +604,7 @@ public class LabTest extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel13.setText("Report Status");
 
-        RStatusAtLab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Not Delivered", "Delivered" }));
+        RStatusAtLab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Not Delivered", "Delivered" }));
 
         date.setDateFormatString("yyyy-MM-dd");
         date.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -759,7 +759,7 @@ public class LabTest extends javax.swing.JFrame {
             }
         });
 
-        gender.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+        gender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -948,7 +948,7 @@ public class LabTest extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1179,10 +1179,6 @@ public class LabTest extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ageActionPerformed
 
-    private void specimenAtLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_specimenAtLabActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_specimenAtLabActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             add_test ();
@@ -1305,30 +1301,6 @@ public class LabTest extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SpecimenNoAtLabFocusLost
 
-    private void specimenAtLabFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_specimenAtLabFocusLost
-        // TODO add your handling code here:
-        String ss= specimenAtLab.getText();
-        if(ss.equals("")){
-            valS.setText("Please enter Specimen!!");
-            valS.setForeground(Color.red);
-        }
-        else{
-            for(int i=0; i < ss.length(); i++){
-                char a = ss.charAt(i);
-                
-                if(Character.isDigit(a)){
-                    valS.setText("Dont enter numbers in Specimen.");
-                    valS.setForeground(Color.red);
-                    
-                }
-                else
-                 valS.setText("");   
-                
-            }
-        }
-        
-    }//GEN-LAST:event_specimenAtLabFocusLost
-
     private void RFphyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_RFphyFocusLost
         // TODO add your handling code here:
         String ss= RFphy.getText();
@@ -1358,22 +1330,44 @@ public class LabTest extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-//        HashMap parameter = new HashMap();
-//        String test= JOptionPane.showInputDialog("Please insert the patient ID");
-//        parameter.put("pId", test);
-//
-//        try {
-//            String path="C:\\Users\\USER\\Desktop\\Desktop Folders\\ITP_SLIIT\\MY ITP\\After prototype\\LAB_REPORT.jrxml";
-//            
-//            JasperReport jr = JasperCompileManager.compileReport(path);  
-//            JasperPrint jp = JasperFillManager.fillReport(jr, parameter, conn);
-//            JasperViewer.viewReport(jp,false);
-//        } catch (JRException ex) {
-//            Logger.getLogger(Stock_management.class.getName()).log(Level.SEVERE, null, ex);
-//            JOptionPane.showMessageDialog(null,ex);
-//        }
+             try{
+           String report="C:\\Users\\Haran\\Documents\\NetBeansProjects\\ps_Atlanta\\src\\REport_lab\\report_test.jrxml";
+           JasperReport jasp=JasperCompileManager.compileReport(report);
+           JasperPrint jas_print=JasperFillManager.fillReport(jasp,null,conn);
+           JasperViewer.viewReport(jas_print);
+       }
+       catch(Exception e){
+          JOptionPane.showMessageDialog(null, e);
+       }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void specimenAtLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_specimenAtLabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_specimenAtLabActionPerformed
+
+    private void specimenAtLabFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_specimenAtLabFocusLost
+        // TODO add your handling code here:
+        String ss= specimenAtLab.getText();
+        if(ss.equals("")){
+            valS.setText("Please enter Specimen!!");
+            valS.setForeground(Color.red);
+        }
+        else{
+            for(int i=0; i < ss.length(); i++){
+                char a = ss.charAt(i);
+
+                if(Character.isDigit(a)){
+                    valS.setText("Dont enter numbers in Specimen.");
+                    valS.setForeground(Color.red);
+
+                }
+                else
+                valS.setText("");
+
+            }
+        }
+
+    }//GEN-LAST:event_specimenAtLabFocusLost
 
     /**
      * @param args the command line arguments

@@ -14,7 +14,16 @@ public class products {
     private String product_name;
     private String count;
     private String id;
+    private String available;
 
+    public String getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(String available) {
+        this.available = available;
+    }
+    
     public String getId() {
         return id;
     }

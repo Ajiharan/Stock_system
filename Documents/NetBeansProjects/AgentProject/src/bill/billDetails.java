@@ -6,6 +6,11 @@
 package bill;
 
 import Database.DBconnection;
+import Storage.stockDetails;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +21,9 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
 import model.products;
 import net.proteanit.sql.DbUtils;
@@ -32,7 +39,7 @@ private final Connection con;
     private ResultSet rs;
     private Statement st;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-    private DefaultTableModel model;
+    private DefaultTableModel model,model1;
     /**
      * Creates new form billDetails
      */
@@ -103,51 +110,39 @@ private final Connection con;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txt_count = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        btn_add = new javax.swing.JButton();
-        lbl_bill = new javax.swing.JLabel();
-        combo_product = new javax.swing.JComboBox<>();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         bill_table = new javax.swing.JTable();
+        lbl_bill = new javax.swing.JLabel();
         txt_billno = new javax.swing.JTextField();
-        btn_finished = new javax.swing.JButton();
-        count_error = new javax.swing.JLabel();
-        bill_error = new javax.swing.JLabel();
-        txt_date = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
+        txt_date = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        combo_product = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        txt_count = new javax.swing.JTextField();
+        bill_error = new javax.swing.JLabel();
         date_error = new javax.swing.JLabel();
+        count_error = new javax.swing.JLabel();
+        btn_finished = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btn_add = new javax.swing.JButton();
+        btn_bill_details = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        txt_filepath = new javax.swing.JTextField();
+        btn_open_fille = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        bill_file_table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(5);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Products");
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        txt_count.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_countKeyReleased(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("count");
-
-        btn_add.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_add.setText("Add");
-        btn_add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addActionPerformed(evt);
-            }
-        });
-
-        lbl_bill.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbl_bill.setText("Bill_No");
-
-        combo_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         bill_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,11 +157,44 @@ private final Connection con;
         ));
         jScrollPane1.setViewportView(bill_table);
 
+        lbl_bill.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_bill.setText("Bill_No");
+
         txt_billno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_billnoKeyReleased(evt);
             }
         });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("Date");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Products");
+
+        combo_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("count");
+
+        txt_count.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_countKeyReleased(evt);
+            }
+        });
+
+        bill_error.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        bill_error.setForeground(new java.awt.Color(255, 0, 0));
+        bill_error.setText("Error");
+
+        date_error.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        date_error.setForeground(new java.awt.Color(255, 0, 0));
+        date_error.setText("Error");
+
+        count_error.setBackground(new java.awt.Color(255, 255, 255));
+        count_error.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        count_error.setForeground(new java.awt.Color(255, 0, 0));
+        count_error.setText("Error");
 
         btn_finished.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_finished.setText("finished");
@@ -176,108 +204,182 @@ private final Connection con;
             }
         });
 
-        count_error.setBackground(new java.awt.Color(255, 255, 255));
-        count_error.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        count_error.setForeground(new java.awt.Color(255, 0, 0));
-        count_error.setText("Error");
-
-        bill_error.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        bill_error.setForeground(new java.awt.Color(255, 0, 0));
-        bill_error.setText("Error");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Date");
-
-        date_error.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        date_error.setForeground(new java.awt.Color(255, 0, 0));
-        date_error.setText("Error");
-
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Stock_details");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        btn_add.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_add.setText("Add");
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addActionPerformed(evt);
+            }
+        });
+
+        btn_bill_details.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_bill_details.setText("current Bill details");
+        btn_bill_details.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_bill_detailsActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setText("Total Bill Details");
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setText("Add Bill");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_bill, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_date, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                                    .addComponent(txt_billno))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(date_error, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                    .addComponent(bill_error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(50, 50, 50)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(combo_product, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(txt_count, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(count_error, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_finished, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_bill_details)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(107, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_bill)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txt_billno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bill_error)))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(16, 16, 16))
+                    .addComponent(date_error))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(combo_product, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_count, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(count_error))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_finished)
+                    .addComponent(jButton2)
+                    .addComponent(btn_bill_details)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("bill_entry", jPanel2);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        btn_open_fille.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_open_fille.setText("open file");
+        btn_open_fille.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_open_filleActionPerformed(evt);
+            }
+        });
+
+        bill_file_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(bill_file_table);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(lbl_bill, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(29, 29, 29)
-                            .addComponent(txt_billno, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txt_count)
-                                .addComponent(combo_product, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_date, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(237, 237, 237)))
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(count_error, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                        .addComponent(bill_error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(date_error, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jButton2)
+                .addGap(45, 45, 45)
+                .addComponent(btn_open_fille)
                 .addGap(18, 18, 18)
-                .addComponent(btn_finished, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 524, Short.MAX_VALUE))
+                .addComponent(txt_filepath, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_billno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bill_error)
-                            .addComponent(lbl_bill))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(txt_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(date_error))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(combo_product, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_count, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(count_error))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(btn_finished))
-                .addGap(54, 54, 54)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_open_fille)
+                    .addComponent(txt_filepath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jTabbedPane1.addTab("bill_details", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -346,14 +448,49 @@ private final Connection con;
     }//GEN-LAST:event_txt_billnoKeyReleased
 
     private void txt_countKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_countKeyReleased
+        boolean ExceptionFound=false;
+        boolean isExceed=false;
+        int total=0;
         String value=txt_count.getText();
         try{
             Double.parseDouble(value);
         }
         catch(NumberFormatException e){
+            ExceptionFound=true;
             txt_count.setText("");
-            JOptionPane.showMessageDialog(null,"Field should include only numbers");
+            JOptionPane.showMessageDialog(rootPane,"Field should include only numbers");
         }
+        if(!ExceptionFound){
+            String sql="select  * from current_stocks where product_name=?";
+            try {
+                ps=con.prepareStatement(sql);
+                ps.setString(1,combo_product.getSelectedItem().toString());
+                rs=ps.executeQuery();
+                while(rs.next()){
+                    total=rs.getInt(4);
+                }
+                if(Integer.parseInt(txt_count.getText()) > total){
+                    isExceed=true;
+                     txt_count.setText("");
+                    count_error.setText(combo_product.getSelectedItem().toString()+" has only "+total +" in stock");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(billDetails.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            finally{
+                try {
+                    ps.close();
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(billDetails.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        if(!isExceed){
+            count_error.setText("");
+        }
+        
+        
     }//GEN-LAST:event_txt_countKeyReleased
 
     private ArrayList<products> get_current_bill_details(){
@@ -436,6 +573,62 @@ private final Connection con;
              display();
     }//GEN-LAST:event_btn_finishedActionPerformed
 
+    private void btn_open_filleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_open_filleActionPerformed
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+		int returnValue = jfc.showOpenDialog(null);
+		// int returnValue = jfc.showSaveDialog(null);
+
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = jfc.getSelectedFile();
+			txt_filepath.setText(selectedFile.toString());
+                    try {
+                        FileWriter fw=new FileWriter(selectedFile);
+                        BufferedWriter bw=new BufferedWriter(fw);
+                        for(int i = 0; i < bill_file_table.getRowCount(); i ++){
+                            for(int  j =0; j <bill_file_table.getColumnCount(); j ++){
+                                bw.write(bill_file_table.getValueAt(j,i).toString());
+                            }
+                        }
+                        bw.close();
+                        fw.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(billDetails.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+		}
+    }//GEN-LAST:event_btn_open_filleActionPerformed
+    private void set_current_stock_details(){
+           model1= new DefaultTableModel(new String[]{"product_id", "product_name", "Instock"}, 0);
+           String sql="select * from current_stocks";
+        try {
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                model1.addRow(new Object[]{rs.getString(2),rs.getString(3),rs.getString(4)});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(stockDetails.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+               try {
+                   ps.close();
+                   rs.close();
+               } catch (SQLException ex) {
+                   Logger.getLogger(stockDetails.class.getName()).log(Level.SEVERE, null, ex);
+               }
+            
+        }
+           
+           bill_table.setModel(model1);
+    }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       set_current_stock_details();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btn_bill_detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bill_detailsActionPerformed
+        display();
+    }//GEN-LAST:event_btn_bill_detailsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -474,21 +667,30 @@ private final Connection con;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bill_error;
+    private javax.swing.JTable bill_file_table;
     private javax.swing.JTable bill_table;
     private javax.swing.JButton btn_add;
+    private javax.swing.JButton btn_bill_details;
     private javax.swing.JButton btn_finished;
+    private javax.swing.JButton btn_open_fille;
     private javax.swing.JComboBox<String> combo_product;
     private javax.swing.JLabel count_error;
     private javax.swing.JLabel date_error;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbl_bill;
     private javax.swing.JTextField txt_billno;
     private javax.swing.JTextField txt_count;
     private com.toedter.calendar.JDateChooser txt_date;
+    private javax.swing.JTextField txt_filepath;
     // End of variables declaration//GEN-END:variables
 }

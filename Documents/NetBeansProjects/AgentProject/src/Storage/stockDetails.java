@@ -8,6 +8,7 @@ package Storage;
 import Database.DBconnection;
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -82,7 +83,8 @@ public class stockDetails extends javax.swing.JFrame {
            finally{
                
                 full_stock_view_table.setModel(DbUtils.resultSetToTableModel(rs));//show all employee details in a table
-                model2=(DefaultTableModel) full_stock_view_table.getModel();//currently add
+                model2=(DefaultTableModel) full_stock_view_table.getModel();//currently 
+                JOptionPane.showMessageDialog(null,full_stock_view_table);
                 try {
                     st.close();
                     rs.close();
@@ -168,6 +170,7 @@ public class stockDetails extends javax.swing.JFrame {
         btn_finished = new javax.swing.JButton();
         btn_stockdetails = new javax.swing.JButton();
         btn_productdetails = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         full_stock_view_table = new javax.swing.JTable();
@@ -226,6 +229,11 @@ public class stockDetails extends javax.swing.JFrame {
         stock_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 stock_tableMouseClicked(evt);
+            }
+        });
+        stock_table.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                stock_tableKeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(stock_table);
@@ -327,7 +335,11 @@ public class stockDetails extends javax.swing.JFrame {
                         .addGap(92, 92, 92)
                         .addComponent(btn_finished, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addComponent(jScrollPane1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,8 +372,14 @@ public class stockDetails extends javax.swing.JFrame {
                     .addComponent(btn_stockdetails)
                     .addComponent(btn_productdetails)
                     .addComponent(btn_finished))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Stock", jPanel1);
@@ -382,6 +400,11 @@ public class stockDetails extends javax.swing.JFrame {
         full_stock_view_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 full_stock_view_tableMouseClicked(evt);
+            }
+        });
+        full_stock_view_table.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                full_stock_view_tableKeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(full_stock_view_table);
@@ -1032,6 +1055,22 @@ public class stockDetails extends javax.swing.JFrame {
          txt_available_stocks.setText(String.valueOf(Integer.parseInt(txt_available_stocks.getText())+Integer.parseInt(update_productcount.getText())- Integer.parseInt(stock_product_id)));
         stock_product_id=update_productcount.getText();
     }//GEN-LAST:event_btn_changeActionPerformed
+
+    private void stock_tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stock_tableKeyPressed
+       
+    }//GEN-LAST:event_stock_tableKeyPressed
+
+    private void full_stock_view_tableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_full_stock_view_tableKeyReleased
+          if(evt.getKeyCode()==KeyEvent.VK_DOWN || evt.getKeyCode()==KeyEvent.VK_UP){
+             btn_change.setEnabled(true);
+             update_productname.setText(String.valueOf(model2.getValueAt(full_stock_view_table.getSelectedRow(),2)));
+             update_productcount.setText(String.valueOf(model2.getValueAt(full_stock_view_table.getSelectedRow(),3)));
+             txt_current_ids.setText(String.valueOf(model2.getValueAt(full_stock_view_table.getSelectedRow(),0)));
+             stock_product_id=String.valueOf(model2.getValueAt(full_stock_view_table.getSelectedRow(),3));
+             current_stocks_pr_id_val=String.valueOf(model2.getValueAt(full_stock_view_table.getSelectedRow(),1));
+             set_available_stocks_details();
+        }
+    }//GEN-LAST:event_full_stock_view_tableKeyReleased
     private void set_available_stocks_details(){
           String sql1="select * from current_stocks  where pid=?";
         try {
@@ -1252,6 +1291,7 @@ public class stockDetails extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> combo_pname;
     private javax.swing.JLabel count_error;
     private javax.swing.JLabel date_error;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JTable full_stock_view_table;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

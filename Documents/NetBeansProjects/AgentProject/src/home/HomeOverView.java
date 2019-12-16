@@ -5,22 +5,25 @@
  */
 package home;
 
+import Storage.stockDetails;
+import bill.billDetails;
 import com.jtattoo.plaf.DecorationHelper;
 import java.awt.Color;
 import java.awt.event.WindowEvent;
 import javax.swing.UIManager;
+import product.home;
 
 /**
  *
  * @author Haran
  */
-public class Home extends javax.swing.JFrame {
+public class HomeOverView extends javax.swing.JFrame {
     private int Xloc;
     private int Yloc;
     /**
      * Creates new form Home
      */
-    public Home() {
+    public HomeOverView() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setOpacity(0.96f);
@@ -64,6 +67,9 @@ public class Home extends javax.swing.JFrame {
         product_panel.setBackground(new java.awt.Color(255, 255, 255));
         product_panel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         product_panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                product_panelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 product_panelMouseEntered(evt);
             }
@@ -163,6 +169,9 @@ public class Home extends javax.swing.JFrame {
         stock_panel.setBackground(new java.awt.Color(255, 255, 255));
         stock_panel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         stock_panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                stock_panelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 stock_panelMouseEntered(evt);
             }
@@ -188,6 +197,9 @@ public class Home extends javax.swing.JFrame {
         bill_panel.setBackground(new java.awt.Color(255, 255, 255));
         bill_panel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         bill_panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bill_panelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 bill_panelMouseEntered(evt);
             }
@@ -395,6 +407,24 @@ public class Home extends javax.swing.JFrame {
        exit_panel.setBackground(Color.WHITE);
     }//GEN-LAST:event_exit_panelMouseExited
 
+    private void product_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_product_panelMouseClicked
+      this.setVisible(false);
+      home h1=new home();
+      h1.setVisible(true);
+    }//GEN-LAST:event_product_panelMouseClicked
+
+    private void stock_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stock_panelMouseClicked
+        this.setVisible(false);
+        stockDetails st=new stockDetails();
+        st.setVisible(true);
+    }//GEN-LAST:event_stock_panelMouseClicked
+
+    private void bill_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bill_panelMouseClicked
+         this.setVisible(false);
+        billDetails bill=new billDetails();
+        bill.setVisible(true);
+    }//GEN-LAST:event_bill_panelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -406,28 +436,29 @@ public class Home extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-//                    UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-//                      DecorationHelper.decorateWindows(false);
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+                    UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+                      DecorationHelper.decorateWindows(false);
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeOverView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeOverView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeOverView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeOverView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                new HomeOverView().setVisible(true);
             }
         });
     }
